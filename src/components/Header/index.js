@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Container, Nav, SignOut } from './styles';
 
-import logo from '../../assets/logo-header.png';
+import logo from '~/assets/logo-header.png';
 
 export default function Header() {
   return (
