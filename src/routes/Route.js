@@ -10,14 +10,14 @@ export default function RouterWrapper({
   isPrivate,
   ...rest
 }) {
-  const signed = false;
+  const signed = true;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/students" />;
   }
 
   const Layout = signed ? DefaultLayout : AuthLayout;
