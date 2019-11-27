@@ -1,13 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { signOut } from '~/store/modules/auth/actions';
 
 import { Container, Nav, SignOut } from './styles';
 
 import logo from '~/assets/logo-header.png';
 
 export default function Header() {
+  const dispatch = useDispatch();
   const { profile } = useSelector(state => state.user);
+
+  function handleSignOut() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <img src={logo} alt="Gympoint" />
@@ -27,7 +35,9 @@ export default function Header() {
       </Nav>
       <SignOut>
         <strong>{profile.name}</strong>
-        <button type="button">sair do sistema</button>
+        <button type="button" onClick={handleSignOut}>
+          sair do sistema
+        </button>
       </SignOut>
     </Container>
   );
