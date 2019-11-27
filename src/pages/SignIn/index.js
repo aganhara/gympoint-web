@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Container } from './styles';
 import logo from '../../assets/logo.png';
 
 export default function SignIn() {
