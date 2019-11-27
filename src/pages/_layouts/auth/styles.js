@@ -42,6 +42,7 @@ export const Content = styled.div`
   }
 
   button {
+    width: 100%;
     height: 45px;
     border: 0;
     border-radius: 4px;
