@@ -43,7 +43,7 @@ export const Container = styled.div`
         height: 36px;
         padding: 10px 0;
         border: 1px solid ${colors.lightgrey};
-        color: ${colors.darkgrey}
+        color: ${colors.darkgrey};
 
         &::placeholder {
           color: ${colors.grey};
@@ -51,4 +51,56 @@ export const Container = styled.div`
       }
     }
   }
+`;
+
+export const StudentList = styled.div`
+  background: ${colors.light};
+  margin-top: 32px;
+  border-radius: 4px;
+  padding: 12px 24px 36px 12px;
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+
+    thead {
+      th {
+        font-weight: bold;
+        font-size: 16px;
+        text-align: left;
+        color: ${colors.darkgrey};
+      }
+    }
+
+    tbody {
+      tr {
+        height: 54px;
+
+        & + tr > td {
+          border-top: 1px solid ${colors.lightgrey};
+        }
+
+        td {
+          color: #666;
+
+          &:last-of-type {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const EditUserButton = styled.button`
+  border: 0;
+  background: none;
+  margin-right: 24px;
+  color: #4d85ee;
+`;
+
+export const RemoveUserButton = styled.button`
+  border: 0;
+  background: none;
+  color: #de3b3b;
 `;

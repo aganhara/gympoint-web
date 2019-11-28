@@ -27,7 +27,7 @@ export default function Header() {
           <Link to="/plans">PLANOS</Link>
         </li>
         <li>
-          <Link to="/">MATRÍCULA</Link>
+          <Link to="/registrations">MATRÍCULA</Link>
         </li>
         <li>
           <Link to="/">PEDIDOS DE AUXÍLIOS</Link>
