@@ -3,7 +3,7 @@ import colors from '../../styles/colors';
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
 
   header {

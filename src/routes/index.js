@@ -6,6 +6,7 @@ import SignIn from '../pages/SignIn';
 import Students from '../pages/Students';
 import Plans from '../pages/Plans';
 import Registrations from '../pages/Registrations';
+import Help from '../pages/Help';
 
 export default function Routes() {
   return (
@@ -14,6 +15,7 @@ export default function Routes() {
       <Route path="/students" component={Students} isPrivate />
       <Route path="/plans" component={Plans} isPrivate />
       <Route path="/registrations" component={Registrations} isPrivate />
+      <Route path="/help" component={Help} isPrivate />
     </Switch>
   );
 }

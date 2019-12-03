@@ -30,7 +30,7 @@ export default function Header() {
           <Link to="/registrations">MATRÍCULA</Link>
         </li>
         <li>
-          <Link to="/">PEDIDOS DE AUXÍLIOS</Link>
+          <Link to="/help">PEDIDOS DE AUXÍLIOS</Link>
         </li>
       </Nav>
       <SignOut>
