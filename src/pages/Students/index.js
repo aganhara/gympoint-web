@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
 import {
@@ -27,10 +28,12 @@ export default function Students() {
       <header>
         <h1>Gerenciando alunos</h1>
         <div>
-          <button type="button">
-            <MdAdd size={20} color="#fff" />
-            CADASTRAR
-          </button>
+          <Link to="/students/form">
+            <button type="button">
+              <MdAdd size={20} color="#fff" />
+              CADASTRAR
+            </button>
+          </Link>
           <input type="text" name="Search" placeholder="Buscar aluno" />
         </div>
       </header>

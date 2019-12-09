@@ -57,8 +57,7 @@ export const StudentList = styled.div`
   background: ${colors.light};
   margin-top: 32px;
   border-radius: 4px;
-  padding: 12px 24px 36px 12px;
-
+  padding: 30px;
   table {
     width: 100%;
     border-spacing: 0;

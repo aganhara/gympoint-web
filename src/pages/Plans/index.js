@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
 import { Container, PlanList, RemoveButton, EditButton } from './styles';
@@ -29,10 +30,12 @@ export default function Plans() {
       <header>
         <h1>Gerenciando planos</h1>
         <div>
-          <button type="button">
-            <MdAdd size={20} color="#fff" />
-            CADASTRAR
-          </button>
+          <Link to="/plans/form">
+            <button type="button">
+              <MdAdd size={20} color="#fff" />
+              CADASTRAR
+            </button>
+          </Link>
         </div>
       </header>
       <PlanList>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { MdAdd } from 'react-icons/md';
 
 import { Container, PlanList, EditButton } from './styles';
 
@@ -21,12 +20,6 @@ export default function Plans() {
     <Container>
       <header>
         <h1>Pedidos de auxílio</h1>
-        <div>
-          <button type="button">
-            <MdAdd size={20} color="#fff" />
-            CADASTRAR
-          </button>
-        </div>
       </header>
       <PlanList>
         <table>
@@ -41,7 +34,7 @@ export default function Plans() {
               <tr key={order.id}>
                 <td>{order.Student.name}</td>
                 <td>
-                  <EditButton>editar</EditButton>
+                  <EditButton>responder</EditButton>
                 </td>
               </tr>
             ))}

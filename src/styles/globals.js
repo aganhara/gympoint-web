@@ -36,5 +36,15 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
+
+    &:hover {
+
+    }
+  }
+
+  header {
+    button {
+      text-transform: uppercase;
+    }
   }
 `;
