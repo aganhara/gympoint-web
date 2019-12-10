@@ -19,7 +19,9 @@ export const Container = styled.div`
     height: 36px;
     font-weight: bold;
     color: ${colors.light};
+    background: ${colors.lightgrey};
     transition: background 0.2s;
+    text-transform: uppercase;
 
     &:hover {
       background: ${darken(0.08, colors.lightgrey)};

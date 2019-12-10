@@ -27,6 +27,7 @@ export const FormInput = styled.div`
     color: #444;
     font-weight: bold;
     text-transform: uppercase;
+    margin-top: 8px;
   }
 
   input {
@@ -34,10 +35,15 @@ export const FormInput = styled.div`
     height: 45px;
     line-height: 45px;
     margin-top: 8px;
-    margin-bottom: 20px;
     border: 1px solid #ddd;
     padding-left: 16px;
     border-radius: 4px;
+
+    &+ span {
+        color: #ee4d64;
+        font-size: 12px;
+        font-weight: normal;
+    }
 
     &::placeholder {
       color: #999;
@@ -47,5 +53,9 @@ export const FormInput = styled.div`
   > div {
     display: flex;
     justify-content: space-between;
+
+    label {
+      max-width: 32%;
+    }
   }
 `;

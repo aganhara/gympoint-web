@@ -41,10 +41,4 @@ export default createGlobalStyle`
 
     }
   }
-
-  header {
-    button {
-      text-transform: uppercase;
-    }
-  }
 `;

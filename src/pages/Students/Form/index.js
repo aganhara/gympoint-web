@@ -1,20 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import * as Yup from 'yup';
 import { Container, FormInput } from './styles';
 import FormNavigation from '~/components/FormNavigation';
 
+import api from '~/services/api';
+import history from '~/services/history';
+
 export default function StudentForm({ match }) {
+  const [user, setUser] = useState({});
+
+  const schema = Yup.object().shape({
+    name: Yup.string().required("O nome é obrigatório"),
+    email: Yup.string().email("Insira um e-mail válido").required("O e-mail é obrigatório"),
+    age: Yup.number("Insira um valor válido").required("A idade é obrigatório"),
+    weight: Yup.number().required("O peso é obrigatório"),
+    height: Yup.number().required("A altura é obrigatório"),
+  });
+
   useEffect(() => {
     const { userId } = match.params;
+
+
     console.log(userId);
   }, [match]);
 
-  function handleSubmit() {
-    console.log('Submit');
+  async function handleSubmit(data) {
+    const response = await api.post('/students', data);
+    console.log(response);
+
+    history.push('/students');
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form schema={schema} initialData={user} onSubmit={handleSubmit}>
       <Container>
         <header>
           <h1>Cadastro de aluno</h1>
@@ -42,11 +61,11 @@ export default function StudentForm({ match }) {
             </label>
             <label>
               Peso
-              <Input id="weight" name="weight" type="number" />
+              <Input id="weight" name="weight" type="number" step="0.1" />
             </label>
             <label>
               Altura
-              <Input id="height" name="height" type="number" />
+              <Input id="height" name="height" type="number" step="0.1" />
             </label>
           </div>
         </FormInput>
