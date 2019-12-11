@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdSearch } from 'react-icons/md';
 
 import {
   Container,
   StudentList,
   EditUserButton,
   RemoveUserButton,
+  SearchContainer,
 } from './styles';
 
 import api from '~/services/api';
@@ -34,7 +35,10 @@ export default function Students() {
               CADASTRAR
             </button>
           </Link>
-          <input type="text" name="Search" placeholder="Buscar aluno" />
+          <SearchContainer>
+            <MdSearch size={20} color="#ddd" />
+            <input type="text" name="Search" placeholder="Buscar aluno" />
+          </SearchContainer>
         </div>
       </header>
       <StudentList>
@@ -54,7 +58,9 @@ export default function Students() {
                 <td>{student.email}</td>
                 <td>{student.age}</td>
                 <td>
-                  <EditUserButton>editar</EditUserButton>
+                  <Link to={{ pathname: `/students/form/${student.id}` }}>
+                    <EditUserButton>editar</EditUserButton>
+                  </Link>
                   <RemoveUserButton>apagar</RemoveUserButton>
                 </td>
               </tr>

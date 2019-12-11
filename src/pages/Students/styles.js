@@ -41,12 +41,13 @@ export const Container = styled.div`
 
       input {
         height: 36px;
-        padding: 10px 0;
+        padding: 10px 0 10px 30px;
         border: 1px solid ${colors.lightgrey};
         color: ${colors.darkgrey};
 
         &::placeholder {
           color: ${colors.grey};
+          /* padding-left: 20px; */
         }
       }
     }
@@ -102,4 +103,15 @@ export const RemoveUserButton = styled.button`
   border: 0;
   background: none;
   color: #de3b3b;
+`;
+
+export const SearchContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  & > svg {
+    position: absolute;
+    left: 6px;
+  }
 `;

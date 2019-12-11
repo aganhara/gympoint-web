@@ -39,10 +39,10 @@ export const FormInput = styled.div`
     padding-left: 16px;
     border-radius: 4px;
 
-    &+ span {
-        color: #ee4d64;
-        font-size: 12px;
-        font-weight: normal;
+    & + span {
+      color: #ee4d64;
+      font-size: 12px;
+      font-weight: normal;
     }
 
     &::placeholder {
