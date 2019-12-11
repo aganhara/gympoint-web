@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
+import { toast } from 'react-toastify';
+import ConfirmationDialog from '~/components/ConfirmationDialog';
 
 import {
   Container,
@@ -14,15 +16,27 @@ import api from '~/services/api';
 
 export default function Students() {
   const [students, setStudents] = useState([]);
+  const [showConfirmDelete, setShowConfigDelete] = useState(false);
+
+  async function loadStudents() {
+    const response = await api.get('students');
+    setStudents(response.data);
+  }
 
   useEffect(() => {
-    async function loadStudents() {
-      const response = await api.get('students');
-      setStudents(response.data);
-    }
-
     loadStudents();
   }, []);
+
+  async function handleDeleteStudent(studentId) {
+    try {
+      await api.delete(`/students/${studentId}`);
+      toast.success('Aluno removido com sucesso');
+      loadStudents();
+    } catch (err) {
+      toast.error('Não foi possível remover o aluno');
+    }
+    setShowConfigDelete(false);
+  }
 
   return (
     <Container>
@@ -61,7 +75,18 @@ export default function Students() {
                   <Link to={{ pathname: `/students/form/${student.id}` }}>
                     <EditUserButton>editar</EditUserButton>
                   </Link>
-                  <RemoveUserButton>apagar</RemoveUserButton>
+
+                  <ConfirmationDialog
+                    message="Deseja remover o aluno?"
+                    show={showConfirmDelete}
+                    title="Confirmar Remoção"
+                    onConfirm={() => handleDeleteStudent(student.id)}
+                    onCancel={() => setShowConfigDelete(false)}
+                  />
+
+                  <RemoveUserButton onClick={() => setShowConfigDelete(true)}>
+                    apagar
+                  </RemoveUserButton>
                 </td>
               </tr>
             ))}
