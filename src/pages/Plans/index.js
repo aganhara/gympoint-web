@@ -11,6 +11,7 @@ import { formatPrice } from '~/util/format';
 
 export default function Plans() {
   const [plans, setPlans] = useState([]);
+  const [planIdForRemove, setPlanIdForRemove] = useState();
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   async function loadPlans() {
@@ -28,13 +29,13 @@ export default function Plans() {
   }, []);
 
   async function handleDeletePlan(planId) {
-    // try {
-    //   await api.delete(`/plans/${planId}`);
-    //   toast.success('Plano removido com sucesso');
-    //   loadPlans();
-    // } catch (err) {
-    //   toast.error('Não foi possível remover o plano');
-    // }
+    try {
+      await api.delete(`/plans/${planId}`);
+      toast.success('Plano removido com sucesso');
+      loadPlans();
+    } catch (err) {
+      toast.error('Não foi possível remover o plano');
+    }
     setShowConfirmDelete(false);
   }
 
@@ -51,6 +52,13 @@ export default function Plans() {
           </Link>
         </div>
       </header>
+      <ConfirmationDialog
+        message="Deseja remover o plano?"
+        show={showConfirmDelete}
+        title="Confirmar Remoção"
+        onConfirm={() => handleDeletePlan(planIdForRemove)}
+        onCancel={() => setShowConfirmDelete(false)}
+      />
       <PlanList>
         <table>
           <thead>
@@ -68,16 +76,15 @@ export default function Plans() {
                 <td>{plan.durationLabel}</td>
                 <td>{plan.formattedPrice}</td>
                 <td>
-                  <EditButton>editar</EditButton>
-
-                  <ConfirmationDialog
-                    message="Deseja remover o plano?"
-                    show={showConfirmDelete}
-                    title="Confirmar Remoção"
-                    onConfirm={() => handleDeletePlan(plan.id)}
-                    onCancel={() => setShowConfirmDelete(false)}
-                  />
-                  <RemoveButton onClick={() => setShowConfirmDelete(true)}>
+                  <Link to={{ pathname: `/plans/form/${plan.id}` }}>
+                    <EditButton>editar</EditButton>
+                  </Link>
+                  <RemoveButton
+                    onClick={() => {
+                      setShowConfirmDelete(true);
+                      setPlanIdForRemove(plan.id);
+                    }}
+                  >
                     apagar
                   </RemoveButton>
                 </td>

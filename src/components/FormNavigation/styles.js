@@ -22,6 +22,7 @@ export const Container = styled.div`
     background: ${colors.lightgrey};
     transition: background 0.2s;
     text-transform: uppercase;
+    cursor: pointer;
 
     &:hover {
       background: ${darken(0.08, colors.lightgrey)};

@@ -18,6 +18,7 @@ import api from '~/services/api';
 export default function Students() {
   const [students, setStudents] = useState([]);
   const [showConfirmDelete, setShowConfigDelete] = useState(false);
+  const [idForRemove, setIdForRemove] = useState();
 
   async function loadStudents() {
     const response = await api.get('students');
@@ -79,6 +80,13 @@ export default function Students() {
           </SearchContainer>
         </div>
       </header>
+      <ConfirmationDialog
+        message="Deseja remover o aluno?"
+        show={showConfirmDelete}
+        title="Confirmar Remoção"
+        onConfirm={() => handleDeleteStudent(idForRemove)}
+        onCancel={() => setShowConfigDelete(false)}
+      />
       <StudentList>
         <table>
           <thead>
@@ -99,16 +107,12 @@ export default function Students() {
                   <Link to={{ pathname: `/students/form/${student.id}` }}>
                     <EditUserButton>editar</EditUserButton>
                   </Link>
-
-                  <ConfirmationDialog
-                    message="Deseja remover o aluno?"
-                    show={showConfirmDelete}
-                    title="Confirmar Remoção"
-                    onConfirm={() => handleDeleteStudent(student.id)}
-                    onCancel={() => setShowConfigDelete(false)}
-                  />
-
-                  <RemoveUserButton onClick={() => setShowConfigDelete(true)}>
+                  <RemoveUserButton
+                    onClick={() => {
+                      setShowConfigDelete(true);
+                      setIdForRemove(student.id);
+                    }}
+                  >
                     apagar
                   </RemoveUserButton>
                 </td>

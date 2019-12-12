@@ -32,6 +32,7 @@ export const Container = styled.div`
         font-weight: bold;
         background: ${colors.primary};
         color: ${colors.light};
+        cursor: pointer;
 
         svg {
           margin-right: 5px;
@@ -96,11 +97,13 @@ export const EditButton = styled.button`
   border: 0;
   background: none;
   margin-right: 24px;
+  cursor: pointer;
   color: #4d85ee;
 `;
 
 export const RemoveButton = styled.button`
   border: 0;
   background: none;
+  cursor: pointer;
   color: #de3b3b;
 `;
