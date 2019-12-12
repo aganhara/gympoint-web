@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import debounce from 'lodash/debounce';
 import ConfirmationDialog from '~/components/ConfirmationDialog';
 
 import {
@@ -27,6 +28,21 @@ export default function Students() {
     loadStudents();
   }, []);
 
+  async function handleStudentSearch(value) {
+    const response = await api.get('/students', {
+      params: {
+        q: value,
+      },
+    });
+
+    setStudents(response.data);
+  }
+
+  const handleStudentFilter = debounce(
+    ({ target: { value } }) => handleStudentSearch(value),
+    500
+  );
+
   async function handleDeleteStudent(studentId) {
     try {
       await api.delete(`/students/${studentId}`);
@@ -51,7 +67,15 @@ export default function Students() {
           </Link>
           <SearchContainer>
             <MdSearch size={20} color="#ddd" />
-            <input type="text" name="Search" placeholder="Buscar aluno" />
+            <input
+              type="text"
+              name="Search"
+              placeholder="Buscar aluno"
+              onChange={e => {
+                e.persist();
+                handleStudentFilter(e);
+              }}
+            />
           </SearchContainer>
         </div>
       </header>

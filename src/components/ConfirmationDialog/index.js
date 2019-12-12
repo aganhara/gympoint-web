@@ -11,14 +11,14 @@ export default function ConfirmationDialog({
 }) {
   return (
     <SweetAlert
-      alert
+      warning
       showCancel
       confirmBtnText="Confirmar"
-      confirmBtnBsStyle="danger"
       show={show}
       title={title}
       onConfirm={onConfirm}
       onCancel={onCancel}
+      focusCancelBtn
     >
       {message}
     </SweetAlert>

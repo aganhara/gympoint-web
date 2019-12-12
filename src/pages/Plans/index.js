@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
+import ConfirmationDialog from '~/components/ConfirmationDialog';
 
 import { Container, PlanList, RemoveButton, EditButton } from './styles';
 
@@ -9,21 +11,32 @@ import { formatPrice } from '~/util/format';
 
 export default function Plans() {
   const [plans, setPlans] = useState([]);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
+  async function loadPlans() {
+    const response = await api.get('plans');
+    setPlans(
+      response.data.map(p => ({
+        ...p,
+        formattedPrice: formatPrice(p.price),
+        durationLabel: `${p.duration} ${p.duration === 1 ? 'Mês' : 'Meses'}`,
+      }))
+    );
+  }
   useEffect(() => {
-    async function loadPlans() {
-      const response = await api.get('plans');
-      setPlans(
-        response.data.map(p => ({
-          ...p,
-          formattedPrice: formatPrice(p.price),
-          durationLabel: `${p.duration} ${p.duration === 1 ? 'Mês' : 'Meses'}`,
-        }))
-      );
-    }
-
     loadPlans();
   }, []);
+
+  async function handleDeletePlan(planId) {
+    // try {
+    //   await api.delete(`/plans/${planId}`);
+    //   toast.success('Plano removido com sucesso');
+    //   loadPlans();
+    // } catch (err) {
+    //   toast.error('Não foi possível remover o plano');
+    // }
+    setShowConfirmDelete(false);
+  }
 
   return (
     <Container>
@@ -56,7 +69,17 @@ export default function Plans() {
                 <td>{plan.formattedPrice}</td>
                 <td>
                   <EditButton>editar</EditButton>
-                  <RemoveButton>apagar</RemoveButton>
+
+                  <ConfirmationDialog
+                    message="Deseja remover o plano?"
+                    show={showConfirmDelete}
+                    title="Confirmar Remoção"
+                    onConfirm={() => handleDeletePlan(plan.id)}
+                    onCancel={() => setShowConfirmDelete(false)}
+                  />
+                  <RemoveButton onClick={() => setShowConfirmDelete(true)}>
+                    apagar
+                  </RemoveButton>
                 </td>
               </tr>
             ))}
