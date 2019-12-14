@@ -46,4 +46,8 @@ export default createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  input[readonly] {
+    background: #eee;
+  }
 `;

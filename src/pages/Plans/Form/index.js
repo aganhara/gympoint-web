@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import FormNavigation from '~/components/FormNavigation';
 import { Container, FormInput } from './styles';
@@ -131,3 +132,11 @@ export default function PlanForm({ match }) {
     </Form>
   );
 }
+
+PlanForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      planId: PropTypes.number,
+    }),
+  }).isRequired,
+};
