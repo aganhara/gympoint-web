@@ -35,6 +35,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "jsx-a11y/control-has-associated-label": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "camelcase": "off",
   },
   settings: {
     "import/resolver": {

@@ -25,7 +25,7 @@ export default function Routes() {
       <Route path="/plans/form/:planId?" component={PlanForm} isPrivate />
       <Route path="/plans" component={Plans} isPrivate />
       <Route
-        path="/registrations/form/:studentId?"
+        path="/registrations/form"
         component={RegistrationForm}
         isPrivate
       />

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { parseISO } from 'date-fns';
 import { MdAdd, MdCheckCircle } from 'react-icons/md';
 
 import { Container, PlanList, RemoveButton, EditButton } from './styles';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import { formatDate } from '~/util/format';
 
@@ -27,17 +27,29 @@ export default function Plans() {
     loadRegistrations();
   }, []);
 
+  function handleEditRegistration(registration) {
+    history.push({
+      pathname: `/registrations/form`,
+      state: { registration },
+    });
+  }
+
+  function handleNewRegistration() {
+    history.push({
+      pathname: `/registrations/form`,
+      state: {},
+    });
+  }
+
   return (
     <Container>
       <header>
         <h1>Gerenciando matrículas</h1>
         <div>
-          <Link to="/registrations/form">
-            <button type="button">
-              <MdAdd size={20} color="#fff" />
-              CADASTRAR
-            </button>
-          </Link>
+          <button type="button" onClick={handleNewRegistration}>
+            <MdAdd size={20} color="#fff" />
+            CADASTRAR
+          </button>
         </div>
       </header>
       <PlanList>
@@ -66,7 +78,11 @@ export default function Plans() {
                   />
                 </td>
                 <td>
-                  <EditButton>editar</EditButton>
+                  <EditButton
+                    onClick={() => handleEditRegistration(registration)}
+                  >
+                    editar
+                  </EditButton>
                   <RemoveButton>apagar</RemoveButton>
                 </td>
               </tr>

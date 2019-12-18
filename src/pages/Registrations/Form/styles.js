@@ -26,7 +26,35 @@ export const FormInput = styled.div`
   label {
     color: #444;
     font-weight: bold;
-    text-transform: uppercase;
+    margin-top: 8px;
+    font-size: 14px;
+
+    /**CSS PARA o componente de react-selection */
+
+    & > div {
+      margin-top: 8px;
+
+      &.react-datepicker-wrapper {
+        margin-top: 0;
+      }
+
+      & div.css-1hwfws3 {
+        height: 43px;
+      }
+
+      & div.css-1uccc91-singleValue {
+        position: relative;
+      }
+      & div.css-b8ldur-Input {
+        height: 43px;
+      }
+
+      & + span {
+        color: #ee4d64;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
   }
 
   input {
@@ -34,7 +62,6 @@ export const FormInput = styled.div`
     height: 45px;
     line-height: 45px;
     margin-top: 8px;
-    margin-bottom: 20px;
     border: 1px solid #ddd;
     padding-left: 16px;
     border-radius: 4px;
@@ -44,11 +71,16 @@ export const FormInput = styled.div`
     }
   }
 
+  input[type='date'] {
+    padding: 10px;
+  }
+
   > div {
     display: flex;
     justify-content: space-between;
 
     label {
+      width: 33%;
       & + label {
         margin-left: 10px;
       }

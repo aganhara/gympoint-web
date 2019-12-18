@@ -26,8 +26,8 @@ export const FormInput = styled.div`
   label {
     color: #444;
     font-weight: bold;
-    text-transform: uppercase;
     margin-top: 8px;
+    font-size: 14px;
   }
 
   input {

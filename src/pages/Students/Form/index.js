@@ -17,7 +17,7 @@ export default function StudentForm({ match }) {
     email: Yup.string()
       .email('Insira um e-mail válido')
       .required('O e-mail é obrigatório'),
-    age: Yup.number('Insira um valor válido').required('A idade é obrigatório'),
+    age: Yup.number().required('A idade é obrigatório'),
     weight: Yup.number().required('O peso é obrigatório'),
     height: Yup.number().required('A altura é obrigatório'),
     id: Yup.number(),
@@ -80,11 +80,11 @@ export default function StudentForm({ match }) {
         <FormInput>
           {user.id && <Input id="id" name="id" type="hidden" />}
           <label>
-            Nome Completo
+            NOME COMPLETO
             <Input id="name" name="name" placeholder="John Doe" />
           </label>
           <label>
-            E-mail
+            ENDEREÇO DE E-MAIL
             <Input
               id="email"
               name="email"
@@ -95,15 +95,15 @@ export default function StudentForm({ match }) {
 
           <div>
             <label>
-              Idade
+              IDADE
               <Input id="age" name="age" type="number" min="1" />
             </label>
             <label>
-              Peso
+              PESO (em Kg)
               <Input id="weight" name="weight" type="number" step="0.1" />
             </label>
             <label>
-              Altura
+              ALTURA
               <Input id="height" name="height" type="number" step="0.01" />
             </label>
           </div>

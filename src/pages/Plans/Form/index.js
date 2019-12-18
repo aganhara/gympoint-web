@@ -88,13 +88,13 @@ export default function PlanForm({ match }) {
         </header>
         <FormInput>
           <label>
-            Título do Plano
+            TÍTULO DO PLANO
             <Input id="title" name="title" />
           </label>
 
           <div>
             <label>
-              Duração
+              DURAÇÃO (em meses)
               <Input
                 id="duration"
                 name="duration"
@@ -106,7 +106,7 @@ export default function PlanForm({ match }) {
               />
             </label>
             <label>
-              Preço
+              PREÇO MENSAL
               <Input
                 id="price"
                 name="price"
@@ -118,7 +118,7 @@ export default function PlanForm({ match }) {
               />
             </label>
             <label>
-              Preço Total
+              PREÇO TOTAL
               <input
                 id="totalPrice"
                 name="totalPrice"
