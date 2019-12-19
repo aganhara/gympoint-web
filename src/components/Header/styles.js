@@ -51,5 +51,6 @@ export const SignOut = styled.div`
     border: 0;
     background: none;
     margin-top: 4px;
+    cursor: pointer;
   }
 `;
