@@ -44,7 +44,7 @@ export default function Plans() {
         <h1>Pedidos de auxílio</h1>
       </header>
       <PlanList>
-        {help && help.length > 0 ? (
+        {help.length > 0 && (
           <>
             <AnswerDialog
               showDialog={showDialog}
@@ -74,9 +74,10 @@ export default function Plans() {
               </tbody>
             </table>
           </>
-        ) : (
-            <div>Nenhum pedido de auxílio pendente de resposta.</div>
-          )}
+        )}
+        {help.length === 0 && (
+          <div>Nenhum pedido de auxílio pendente de resposta.</div>
+        )}
       </PlanList>
     </Container>
   );
