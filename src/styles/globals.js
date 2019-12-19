@@ -27,6 +27,12 @@ export default createGlobalStyle`
     font: 16px 'Roboto', sans-serif;
   }
 
+
+  @keyframes link-header-animation {
+      from {width: 0;}
+      to {width:100%;}
+  }
+
   a {
     text-decoration: none;
 
@@ -39,7 +45,22 @@ export default createGlobalStyle`
         border-color: #ee4d64 !important;
         box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset, rgb(238, 77, 100) 0px 0px !important;
         color: #fff;
-        /* width: 100%; */
+      }
+    }
+
+    &.active {
+      font-weight: bold;
+      color: #444!important;
+      position: relative;
+
+      &:after {
+        content: ' ';
+        border-bottom: 1px solid #ee4d64;
+        padding-bottom: 5px;
+        width: 100%;
+        display: block;
+        position: absolute;
+        animation: link-header-animation .5s;
       }
     }
   }

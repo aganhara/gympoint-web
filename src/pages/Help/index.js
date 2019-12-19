@@ -44,37 +44,39 @@ export default function Plans() {
         <h1>Pedidos de auxílio</h1>
       </header>
       <PlanList>
-        <AnswerDialog
-          showDialog={showDialog}
-          onConfirm={handleConfirmation}
-          order={selectedOrder}
-          title="PERGUNTA DO ALUNO"
-          onCancel={() => setShowDialog(false)}
-        />
         {help && help.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>ALUNO</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {help.map(order => (
-                <tr key={order.id}>
-                  <td>{order.Student.name}</td>
-                  <td>
-                    <AnswerButton onClick={() => handleOrderAnswer(order)}>
-                      responder
-                    </AnswerButton>
-                  </td>
+          <>
+            <AnswerDialog
+              showDialog={showDialog}
+              onConfirm={handleConfirmation}
+              order={selectedOrder}
+              title="PERGUNTA DO ALUNO"
+              onCancel={() => setShowDialog(false)}
+            />
+            <table>
+              <thead>
+                <tr>
+                  <th>ALUNO</th>
+                  <th />
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {help.map(order => (
+                  <tr key={order.id}>
+                    <td>{order.Student.name}</td>
+                    <td>
+                      <AnswerButton onClick={() => handleOrderAnswer(order)}>
+                        responder
+                      </AnswerButton>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
         ) : (
-          <div>Nenhum pedido de auxílio pendente de resposta.</div>
-        )}
+            <div>Nenhum pedido de auxílio pendente de resposta.</div>
+          )}
       </PlanList>
     </Container>
   );

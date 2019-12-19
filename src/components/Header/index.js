@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { signOut } from '~/store/modules/auth/actions';
 
@@ -8,9 +9,13 @@ import { Container, Nav, SignOut } from './styles';
 
 import logo from '~/assets/logo-header.png';
 
-export default function Header() {
+export default function Header({ currentPath }) {
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.user);
+
+  function handleClassName(pathname) {
+    return pathname === currentPath ? 'active' : '';
+  }
 
   function handleSignOut() {
     dispatch(signOut());
@@ -21,16 +26,27 @@ export default function Header() {
       <img src={logo} alt="Gympoint" />
       <Nav>
         <li>
-          <Link to="/students">ALUNOS</Link>
+          <Link to="/students" className={handleClassName('/students')}>
+            ALUNOS
+          </Link>
         </li>
         <li>
-          <Link to="/plans">PLANOS</Link>
+          <Link to="/plans" className={handleClassName('/plans')}>
+            PLANOS
+          </Link>
         </li>
         <li>
-          <Link to="/registrations">MATRÍCULA</Link>
+          <Link
+            to="/registrations"
+            className={handleClassName('/registrations')}
+          >
+            MATRÍCULA
+          </Link>
         </li>
         <li>
-          <Link to="/help">PEDIDOS DE AUXÍLIOS</Link>
+          <Link to="/help" className={handleClassName('/help')}>
+            PEDIDOS DE AUXÍLIOS
+          </Link>
         </li>
       </Nav>
       <SignOut>
@@ -42,3 +58,7 @@ export default function Header() {
     </Container>
   );
 }
+
+Header.propTypes = {
+  currentPath: PropTypes.string.isRequired,
+};

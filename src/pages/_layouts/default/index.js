@@ -5,9 +5,12 @@ import Header from '../../../components/Header';
 import { Wrapper } from './styles';
 
 export default function DefaultLayout({ children }) {
+  const {
+    props: { location },
+  } = children;
   return (
     <Wrapper>
-      <Header />
+      <Header currentPath={location.pathname} />
       {children}
     </Wrapper>
   );
