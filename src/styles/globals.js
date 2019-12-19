@@ -35,10 +35,11 @@ export default createGlobalStyle`
       border-radius: 4px;
 
       &.btn-primary {
-        background: #de3b3b;
-        border-color: #de3b3b !important;
-        box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset, rgb(222, 59, 59) 0px 0px !important;
+        background: #ee4d64;
+        border-color: #ee4d64 !important;
+        box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset, rgb(238, 77, 100) 0px 0px !important;
         color: #fff;
+        /* width: 100%; */
       }
     }
   }
@@ -49,5 +50,19 @@ export default createGlobalStyle`
 
   input[readonly] {
     background: #eee;
+  }
+
+  .sweet-alert.answer-dialog {
+    textarea {
+      font: 16px 'Roboto', sans-serif;
+      width: 100%;
+      border-radius: 4px;
+      padding: 10px;
+      color: #595959;
+    }
+    .btn-primary {
+      width: 100%;
+      margin-right: 0!important;
+    }
   }
 `;

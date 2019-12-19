@@ -92,15 +92,10 @@ export const PlanList = styled.div`
   }
 `;
 
-export const EditButton = styled.button`
+export const AnswerButton = styled.button`
   border: 0;
   background: none;
   margin-right: 24px;
   color: #4d85ee;
-`;
-
-export const RemoveButton = styled.button`
-  border: 0;
-  background: none;
-  color: #de3b3b;
+  cursor: pointer;
 `;
