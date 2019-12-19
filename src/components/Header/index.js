@@ -14,7 +14,7 @@ export default function Header({ currentPath }) {
   const { profile } = useSelector(state => state.user);
 
   function handleClassName(pathname) {
-    return pathname === currentPath ? 'active' : '';
+    return new RegExp(pathname).test(currentPath) ? 'active' : '';
   }
 
   function handleSignOut() {

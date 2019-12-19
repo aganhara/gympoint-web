@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { Form, Input } from '@rocketseat/unform';
@@ -9,8 +9,8 @@ import FormNavigation from '~/components/FormNavigation';
 import api from '~/services/api';
 import history from '~/services/history';
 
-export default function StudentForm({ match }) {
-  const [user, setUser] = useState({});
+export default function StudentForm({ location }) {
+  const [student] = useState(location.state.student);
 
   const schema = Yup.object().shape({
     name: Yup.string().required('O nome é obrigatório'),
@@ -22,19 +22,6 @@ export default function StudentForm({ match }) {
     height: Yup.number().required('A altura é obrigatório'),
     id: Yup.number(),
   });
-
-  useEffect(() => {
-    async function loadStudent() {
-      const { studentId } = match.params;
-
-      if (studentId) {
-        const response = await api.get(`/students/${studentId}`);
-        setUser(response.data);
-      }
-    }
-
-    loadStudent();
-  }, [match]);
 
   async function handleAddStudent(data) {
     try {
@@ -69,8 +56,8 @@ export default function StudentForm({ match }) {
   return (
     <Form
       schema={schema}
-      initialData={user}
-      onSubmit={user.id ? handleUpdateStudent : handleAddStudent}
+      initialData={student}
+      onSubmit={student.id ? handleUpdateStudent : handleAddStudent}
     >
       <Container>
         <header>
@@ -78,7 +65,7 @@ export default function StudentForm({ match }) {
           <FormNavigation />
         </header>
         <FormInput>
-          {user.id && <Input id="id" name="id" type="hidden" />}
+          {student.id && <Input id="id" name="id" type="hidden" />}
           <label>
             NOME COMPLETO
             <Input id="name" name="name" placeholder="John Doe" />
@@ -114,9 +101,9 @@ export default function StudentForm({ match }) {
 }
 
 StudentForm.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      studentId: PropTypes.string,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      student: PropTypes.object,
     }),
   }).isRequired,
 };

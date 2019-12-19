@@ -104,7 +104,12 @@ export default function Students() {
                 <td>{student.email}</td>
                 <td>{student.age}</td>
                 <td>
-                  <Link to={{ pathname: `/students/form/${student.id}` }}>
+                  <Link
+                    to={{
+                      pathname: '/students/form/',
+                      state: { student },
+                    }}
+                  >
                     <EditUserButton>editar</EditUserButton>
                   </Link>
                   <RemoveUserButton
