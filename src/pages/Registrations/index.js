@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { parseISO } from 'date-fns';
 import { MdAdd, MdCheckCircle } from 'react-icons/md';
+import ConfirmationDialog from '~/components/ConfirmationDialog';
 
 import { Container, PlanList, RemoveButton, EditButton } from './styles';
 
@@ -11,19 +13,21 @@ import { formatDate } from '~/util/format';
 
 export default function Plans() {
   const [registrations, setRegistrations] = useState([]);
+  const [showConfirmDelete, setShowConfigDelete] = useState(false);
+  const [idForRemove, setIdForRemove] = useState();
+
+  async function loadRegistrations() {
+    const response = await api.get('registrations');
+    setRegistrations(
+      response.data.map(r => ({
+        ...r,
+        formattedStartDate: formatDate(parseISO(r.start_date)),
+        formattedEndDate: formatDate(parseISO(r.end_date)),
+      }))
+    );
+  }
 
   useEffect(() => {
-    async function loadRegistrations() {
-      const response = await api.get('registrations');
-      setRegistrations(
-        response.data.map(r => ({
-          ...r,
-          formattedStartDate: formatDate(parseISO(r.start_date)),
-          formattedEndDate: formatDate(parseISO(r.end_date)),
-        }))
-      );
-    }
-
     loadRegistrations();
   }, []);
 
@@ -41,6 +45,17 @@ export default function Plans() {
     });
   }
 
+  async function handleDeleteRegistration(studentId) {
+    try {
+      await api.delete(`/registrations/${studentId}`);
+      toast.success('Matrícula removida com sucesso');
+      loadRegistrations();
+    } catch (err) {
+      toast.error('Não foi possível remover a matrícula');
+    }
+    setShowConfigDelete(false);
+  }
+
   return (
     <Container>
       <header>
@@ -52,6 +67,13 @@ export default function Plans() {
           </button>
         </div>
       </header>
+      <ConfirmationDialog
+        message="Deseja remover a matrícula?"
+        show={showConfirmDelete}
+        title="Confirmar Remoção"
+        onConfirm={() => handleDeleteRegistration(idForRemove)}
+        onCancel={() => setShowConfigDelete(false)}
+      />
       <PlanList>
         <table>
           <thead>
@@ -83,7 +105,14 @@ export default function Plans() {
                   >
                     editar
                   </EditButton>
-                  <RemoveButton>apagar</RemoveButton>
+                  <RemoveButton
+                    onClick={() => {
+                      setShowConfigDelete(true);
+                      setIdForRemove(registration.student_id);
+                    }}
+                  >
+                    apagar
+                  </RemoveButton>
                 </td>
               </tr>
             ))}
