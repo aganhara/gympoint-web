@@ -9,11 +9,13 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { formatPrice } from '~/util/format';
 
-export default function PlanForm({ match }) {
+export default function PlanForm({ location }) {
+  const { state } = location;
+
   const [formDuration, setDuration] = useState(0);
   const [formPrice, setPrice] = useState(0);
   const [totalPrice, settotalPrice] = useState(0);
-  const [plan, setPlan] = useState({});
+  const [plan] = useState(state ? state.selectedPlan : {});
 
   const schema = Yup.object().shape({
     title: Yup.string().required('O título do plano é requerido'),
@@ -26,20 +28,11 @@ export default function PlanForm({ match }) {
   });
 
   useEffect(() => {
-    async function loadPlan() {
-      const { planId } = match.params;
-
-      if (planId) {
-        const response = await api.get(`/plans/${planId}`);
-        setPlan(response.data);
-        const { price, duration } = response.data;
-        setPrice(price);
-        setDuration(duration);
-      }
+    if (plan.id) {
+      setPrice(plan.price);
+      setDuration(plan.duration);
     }
-
-    loadPlan();
-  }, [match.params]);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     if (formDuration && formPrice) {
@@ -134,9 +127,9 @@ export default function PlanForm({ match }) {
 }
 
 PlanForm.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      planId: PropTypes.number,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      selectedPlan: PropTypes.object,
     }),
   }).isRequired,
 };

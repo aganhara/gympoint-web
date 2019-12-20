@@ -76,7 +76,12 @@ export default function Plans() {
                 <td>{plan.durationLabel}</td>
                 <td>{plan.formattedPrice}</td>
                 <td>
-                  <Link to={{ pathname: `/plans/form/${plan.id}` }}>
+                  <Link
+                    to={{
+                      pathname: '/plans/form',
+                      state: { selectedPlan: plan },
+                    }}
+                  >
                     <EditButton>editar</EditButton>
                   </Link>
                   <RemoveButton
