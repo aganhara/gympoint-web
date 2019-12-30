@@ -17,4 +17,5 @@ yarn start
 See the other parts of the project:
 
 API: https://github.com/aganhara/gympoint
+
 Mobile: https://github.com/aganhara/gympoint-mobile
