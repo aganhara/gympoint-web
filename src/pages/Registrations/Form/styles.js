@@ -34,18 +34,7 @@ export const FormInput = styled.div`
     & > div {
       margin-top: 8px;
 
-      &.react-datepicker-wrapper {
-        margin-top: 0;
-      }
-
       & div.css-1hwfws3 {
-        height: 43px;
-      }
-
-      & div.css-1uccc91-singleValue {
-        position: relative;
-      }
-      & div.css-b8ldur-Input {
         height: 43px;
       }
 

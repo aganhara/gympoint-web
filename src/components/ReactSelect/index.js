@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 import { useField } from '@rocketseat/unform';
 
@@ -18,7 +19,7 @@ export default function ReactSelect({
   useEffect(() => setValue(defaultValueSelected), [defaultValueSelected]);
 
   function parseSelectValue(selectRef) {
-    return isNaN(selectRef.state.value)
+    return Number.isNaN(selectRef.state.value)
       ? selectRef.state.value.value
       : selectRef.state.value;
   }
@@ -47,6 +48,7 @@ export default function ReactSelect({
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       <Select
+        className="react-select-container"
         name={fieldName}
         aria-label={fieldName}
         options={options}
@@ -64,3 +66,15 @@ export default function ReactSelect({
     </>
   );
 }
+
+ReactSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.any).isRequired,
+  defaultValueSelected: PropTypes.string.isRequired,
+  callback: PropTypes.func.isRequired,
+};
+
+ReactSelect.defaultProps = {
+  label: null,
+};
